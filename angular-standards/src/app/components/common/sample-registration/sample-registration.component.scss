@@ -1,0 +1,23 @@
+//CLASSES
+.required-field::before {
+  content: "*";
+  color: red;
+  float: right;
+  padding-left: 2px;
+}
+
+.sign-in-display {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+//ID's
+#span-rounded-right{
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+//TAGS
+a{
+  cursor: pointer;
+}

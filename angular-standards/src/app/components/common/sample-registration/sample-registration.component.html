@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration <Details></Details></title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row pt-5">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h2 class="sign-in-display fs-2" sampleHighlighter>Registration Details</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <a class="d-flex justify-content-end" [routerLink]="['/sign-in']">Already have an account? Sign In</a>
+            </div>
+        </div>
+        <form class="row g-3" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label required-field">Email</label>
+                <input type="email" class="form-control" id="inputEmail" formControlName="email" required
+                    [class.is-invalid]="formControls['email'].touched && formControls['email'].invalid"
+                    [class.is-valid]="formControls['email'].touched && formControls['email'].valid">
+                <span *ngIf="formControls['email'].errors && formControls['email'].errors['required']"
+                    class="invalid-feedback">Email is mandatory.</span>
+                <span *ngIf="formControls['email'].errors && formControls['email'].errors['email']"
+                    class="invalid-feedback">Please enter valid email address.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword" class="form-label required-field">Password</label>
+                <div class="input-group">
+                    <input matInput [type]="passwordVisibility ? 'password' : 'text'" oncopy="return false;"
+                        onpaste="return false;" class="form-control" id="inputPassword" formControlName="password"
+                        required
+                        [class.is-invalid]="formControls['password'].touched && formControls['password'].invalid"
+                        [class.is-valid]="formControls['password'].touched && formControls['password'].valid">
+                    <span class="input-group-text" id="span-rounded-right">
+                        <mat-icon matSuffix (click)="passwordVisibility = !passwordVisibility"
+                            [attr.aria-label]="'Password Visibility'" [attr.aria-pressed]="passwordVisibility">
+                            {{passwordVisibility ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </span>
+                    <span *ngIf="formControls['password'].errors && formControls['password'].errors['required']"
+                        class="invalid-feedback">Password is mandatory.</span>
+                    <span *ngIf="formControls['password'].errors && formControls['password'].errors['pattern']"
+                        class="invalid-feedback">Minimum 8 characters, 1 Lowercase letter, 1 Uppercase letter, 1 Number,
+                        1 Special character</span>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputSection" class="form-label required-field">Section</label>
+                <select id="inputSection" class="form-select" formControlName="section" required
+                    [class.is-invalid]="formControls['section'].touched && formControls['section'].invalid"
+                    [class.is-valid]="formControls['section'].touched && formControls['section'].valid">
+                    <option value="" disabled selected hidden>Please Choose One</option>
+                    <option *ngFor="let sampleRegistrationSection of sampleRegistrationSectionFormOutput"
+                        value="{{sampleRegistrationSection.sectionName}}">{{sampleRegistrationSection.sectionName}}</option>
+                </select>
+                <span *ngIf="formControls['section'].errors && formControls['section'].errors['required']"
+                    class="invalid-feedback">Please choose section.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputApplication" class="form-label required-field">Application</label>
+                <select id="inputApplication" class="form-select" formControlName="application" required
+                    [class.is-invalid]="formControls['application'].touched && formControls['application'].invalid"
+                    [class.is-valid]="formControls['application'].touched && formControls['application'].valid">
+                    <option value="" disabled selected hidden>Please Choose One</option>
+                    <option *ngFor="let sampleRegistrationApplication of sampleRegistrationApplicationFormOutput"
+                        value="{{sampleRegistrationApplication.applicationName}}">
+                        {{sampleRegistrationApplication.applicationName}}</option>
+                </select>
+                <span *ngIf="formControls['application'].errors && formControls['application'].errors['required']"
+                    class="invalid-feedback">Please choose application.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputSurname" class="form-label required-field">Surname</label>
+                <input type="text" class="form-control" id="inputSurname" formControlName="surname" required
+                    [class.is-invalid]="formControls['surname'].touched && formControls['surname'].invalid"
+                    [class.is-valid]="formControls['surname'].touched && formControls['surname'].valid">
+                <span *ngIf="formControls['surname'].errors && formControls['surname'].errors['required']"
+                    class="invalid-feedback">Surname is mandatory.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputOtherName" class="form-label required-field">Other Name</label>
+                <input type="text" class="form-control" id="inputOtherName" formControlName="otherName" required
+                    [class.is-invalid]="formControls['otherName'].touched && formControls['otherName'].invalid"
+                    [class.is-valid]="formControls['otherName'].touched && formControls['otherName'].valid">
+                <span *ngIf="formControls['otherName'].errors && formControls['otherName'].errors['required']"
+                    class="invalid-feedback">Othername is mandatory.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputNIC" class="form-label required-field">NIC</label>
+                <input type="text" class="form-control" id="inputNIC" formControlName="nic" required
+                    [class.is-invalid]="formControls['nic'].touched && formControls['nic'].invalid"
+                    [class.is-valid]="formControls['nic'].touched && formControls['nic'].valid">
+                <span *ngIf="formControls['nic'].errors && formControls['nic'].errors['required']"
+                    class="invalid-feedback">NIC is mandatory.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPhoto" class="form-label required-field">Photo</label>
+                <input type="file" class="form-control" id="inputPhoto" formControlName="photo" required
+                    [class.is-invalid]="formControls['photo'].touched && formControls['photo'].invalid"
+                    [class.is-valid]="formControls['photo'].touched && formControls['photo'].valid">
+                <span *ngIf="formControls['photo'].errors && formControls['photo'].errors['required']"
+                    class="invalid-feedback">Photo is mandatory.</span>
+                <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="row pt-3">
+                <label for="inputContactDetails" class="form-label">Contact Details:</label><br>
+                <div class="col-md-4">
+                    <label for="inputContactDetails" class="form-label required-field">Private Phone Number</label>
+                    <input type="number" class="form-control" id="inputPrivatePhoneNumberDetails"
+                        formControlName="privatePhoneNumber" required
+                        [class.is-invalid]="formControls['privatePhoneNumber'].touched && formControls['privatePhoneNumber'].invalid"
+                        [class.is-valid]="formControls['privatePhoneNumber'].touched && formControls['privatePhoneNumber'].valid">
+                    <span
+                        *ngIf="formControls['privatePhoneNumber'].errors && formControls['privatePhoneNumber'].errors['required']"
+                        class="invalid-feedback">Private phone number is mandatory.</span>
+                    <span
+                        *ngIf="formControls['privatePhoneNumber'].errors && formControls['privatePhoneNumber'].errors['pattern']"
+                        class="invalid-feedback">Private phone number must be minimum 8 digits.</span>
+                    <div class="valid-feedback">Looks good!</div><br>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputContactDetails" class="form-label required-field">Private Mobile Number</label>
+                    <input type="number" class="form-control" id="inputPrivateMobileNumberDetails"
+                        formControlName="privateMobileNumber" required
+                        [class.is-invalid]="formControls['privateMobileNumber'].touched && formControls['privateMobileNumber'].invalid"
+                        [class.is-valid]="formControls['privateMobileNumber'].touched && formControls['privateMobileNumber'].valid">
+                    <span
+                        *ngIf="formControls['privateMobileNumber'].errors && formControls['privateMobileNumber'].errors['required']"
+                        class="invalid-feedback">Private mobile number is mandatory.</span>
+                    <span
+                        *ngIf="formControls['privateMobileNumber'].errors && formControls['privateMobileNumber'].errors['pattern']"
+                        class="invalid-feedback">Private mobile number must be minimum 8 digits.</span>
+                    <div class="valid-feedback">Looks good!</div><br>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputContactDetails" class="form-label required-field">Business Phone Number</label>
+                    <input type="number" class="form-control" id="inputBusinessPhoneNumberDetails"
+                        formControlName="businessPhoneNumber" required
+                        [class.is-invalid]="formControls['businessPhoneNumber'].touched && formControls['businessPhoneNumber'].invalid"
+                        [class.is-valid]="formControls['businessPhoneNumber'].touched && formControls['businessPhoneNumber'].valid">
+                    <span
+                        *ngIf="formControls['businessPhoneNumber'].errors && formControls['businessPhoneNumber'].errors['required']"
+                        class="invalid-feedback">Business phone number is mandatory.</span>
+                    <span
+                        *ngIf="formControls['businessPhoneNumber'].errors && formControls['businessPhoneNumber'].errors['pattern']"
+                        class="invalid-feedback">Business phone number must be minimum 8 digits.</span>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="inputAddressDetails" class="form-label">Address Details:</label><br>
+                <div class="col-md-6">
+                    <label for="inputAddressDetails" class="form-label required-field">Address 1</label>
+                    <textarea class="form-control" id="inputAddress1Details" formControlName="address1" required
+                        [class.is-invalid]="formControls['address1'].touched && formControls['address1'].invalid"
+                        [class.is-valid]="formControls['address1'].touched && formControls['address1'].valid">
+                </textarea>
+                    <span *ngIf="formControls['address1'].errors && formControls['address1'].errors['required']"
+                        class="invalid-feedback">Address is mandatory.</span>
+                    <div class="valid-feedback">Looks good!</div>
+                    <br>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputAddressDetails" class="form-label">Address 2</label>
+                    <textarea class="form-control" id="inputAddress2Details" formControlName="address2"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="inputAddressDetails" class="form-label">Address 3</label>
+                    <textarea class="form-control" id="inputAddress3Details" formControlName="address3"></textarea><br>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputAddressDetails" class="form-label">Address 4</label>
+                    <textarea class="form-control" id="inputAddress4Details" formControlName="address4"></textarea><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="inputAddressDetails" class="form-label">Address 5</label>
+                    <textarea class="form-control" id="inputAddress5Details" formControlName="address5"></textarea><br>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputAddressDetails" class="form-label required-field">Country</label>
+                    <input type="text" class="form-control" id="inputCountry" formControlName="country" required
+                        [class.is-invalid]="formControls['country'].touched && formControls['country'].invalid"
+                        [class.is-valid]="formControls['country'].touched && formControls['country'].valid">
+                    <span *ngIf="formControls['country'].errors && formControls['country'].errors['required']"
+                        class="invalid-feedback">Country is mandatory.</span>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputGender" class="form-label pe-3 required-field">Gender:</label>
+                <div class="form-check form-check-inline">
+                    <div *ngFor="let sampleGender of sampleGenderEnum | sampleEnumToEntries"
+                        class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio{{sampleGender[0]}}"
+                            value={{sampleGender[0]}} formControlName="gender" required>
+                        <label class="form-check-label" for="inlineRadio{{sampleGender[0]}}">{{sampleGender[1]}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputStatus" class="form-label pe-3 required-field">Status:</label>
+                <div class="form-check form-check-inline">
+                    <div *ngFor="let sampleRegistrationStatus of sampleRegistrationStatusEnum | sampleEnumToEntries"
+                        class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="status"
+                            id="inlineRadio{{sampleRegistrationStatus[0]}}" value={{sampleRegistrationStatus[0]}} formControlName="status"
+                            required>
+                        <label class="form-check-label"
+                            for="inlineRadio{{sampleRegistrationStatus[0]}}">{{sampleRegistrationStatus[1]}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="btn button-color text-white" [disabled]="!registrationForm.valid">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
